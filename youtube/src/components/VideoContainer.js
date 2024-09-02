@@ -3,27 +3,28 @@ import { YOUTUBE_VIDEOS_API } from '../utils/constant'
 import VideoCard from './VideoCard'
 
 const VideoContainer = () => {
+  const [videos, setVideos] = useState([]);
 
-  const [videos,setVideos]=useState([])
-
-  useEffect(()=>{
-    getVideos()
-    console.log(videos);
-    
-  },[])
+  useEffect(() => {
+    getVideos();
+  }, []);
 
   const getVideos = async () => {
     const data = await fetch(YOUTUBE_VIDEOS_API);
     const json = await data.json();
     console.log('Fetched videos:', json);
-    setVideos(json);
+    setVideos(json.items);
   };
-  
+
   return (
-    <div>
-      {/* <VideoCard info={videos[0]}/> */}
+    <div className='flex flex-wrap'>
+      {videos.length > 0 ? (
+       videos.map(video=> <VideoCard id={video.id} info={video}/>) 
+      ) : (
+        <p>Loading...</p> // You can customize this with a spinner or loading animation
+      )}
     </div>
   )
 }
 
-export default VideoContainer
+export default VideoContainer;
