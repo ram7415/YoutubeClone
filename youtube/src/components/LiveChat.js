@@ -1,9 +1,10 @@
 import React from 'react'
+import ChatMessage from './ChatMessage'
 
 const LiveChat = () => {
   return (
     <div className='w-fill h-[600px] ml-2 p-2  border border-black bg-slate-100 rounded-lg'>
-        LiveChat</div>
+        <ChatMessage name='Ram' message='hello from chat'/></div>
   )
 }
 
